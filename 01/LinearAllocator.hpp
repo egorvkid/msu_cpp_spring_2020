@@ -7,7 +7,7 @@ class LinearAllocator
         char * end_;
 
     public:
-        LinearAllocator (std::size_t maxSize);
+        makeAllocator (std::size_t maxSize);
         ~LinearAllocator ();
         char* alloc (std::size_t size);
         void reset ();
