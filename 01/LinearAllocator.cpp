@@ -2,7 +2,7 @@
 #include "LinearAllocator.hpp"
 
 
-LinearAllocator::LinearAllocator (std::size_t maxSize) : maxSize (maxSize) {
+LinearAllocator::makeAllocator (std::size_t maxSize) : maxSize (maxSize) {
     
     start_ = static_cast<char *>(std::malloc(maxSize));
     
