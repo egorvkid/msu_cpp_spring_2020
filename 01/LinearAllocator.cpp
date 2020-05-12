@@ -15,7 +15,7 @@ int makeAllocator(size_t maxS)
 	currSize = 0;
 	if (!(beginPointer = (char*)malloc(maxSize)))
 	{
-		return 1;
+		return true;
 	}
 	endPointer = beginPointer;
 	return 0;
