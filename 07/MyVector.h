@@ -283,7 +283,7 @@ void MyVector<T>::push_back(const value_type& x) {
 	if (last_ == end_) {
 		// growth factor 1.5
 		size_type new_capacity = capacity();
-		new_capacity = 1.5 * new_capacity + 1;
+		new_capacity = 2 * new_capacity + 1;
 		reallocate(new_capacity);
 	}
 	allocator_.construct(last_, x);
@@ -295,7 +295,7 @@ void MyVector<T>::push_back(value_type&& x) {
 	if (last_ == end_) {
 		// growth factor 1.5
 		size_type new_capacity = capacity();
-		new_capacity = 1.5 * new_capacity + 1;
+		new_capacity = 2 * new_capacity + 1;
 		reallocate(new_capacity);
 	}
 	allocator_.construct(last_, std::move(x));
@@ -366,14 +366,14 @@ void MyVector<T>::reallocate(size_type n) {
 	// 4. copy data to new memory
 
 	size_type old_size = size();
-	value_type* buffer = new value_type[old_size];
+	//value_type* buffer = new value_type[old_size];
 	//value_type buffer[old_size];
-	copy_data(buffer, first_, old_size);
+	//copy_data(buffer, first_, old_size);
 
-	delete_vector();
-
+	//delete_vector();
+	//copy_data(allocator_.allocate(n), first_, old_size);
 	first_ = allocator_.allocate(n);
-	copy_data(first_, buffer, old_size);
+	//copy_data(first_, buffer, old_size);
 
 	last_ = first_ + old_size;
 	end_ = first_ + n;
