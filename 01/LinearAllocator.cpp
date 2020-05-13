@@ -2,12 +2,13 @@
 #include <cstdlib>
 #include "LinearAllocator.h"
 
+
 using namespace std;
 
-char* beginPointer;
-char* endPointer;
-size_t maxSize;
-size_t currSize;
+char* beginPointer = nullptr;
+char* endPointer = nullptr;
+size_t maxSize = 0;
+size_t currSize = 0;
 
 int makeAllocator(size_t maxS)
 {
@@ -44,5 +45,6 @@ void freeAllocator()
 	maxSize = 0;
 	currSize = 0;
 	endPointer = nullptr;
+	beginPointer = nullptr;
 	free(beginPointer);
 }
