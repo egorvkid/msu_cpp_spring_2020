@@ -6,45 +6,37 @@
 using namespace std;
 
 char* beginPointer = nullptr;
-char* endPointer = nullptr;
 size_t maxSize = 0;
 size_t currSize = 0;
 
-int makeAllocator(size_t maxS)
+void makeAllocator(size_t maxS)
 {
+	if (!maxS)
+		return;
 	maxSize = maxS;
 	currSize = 0;
-	if (!(beginPointer = (char*)malloc(maxSize)))
-	{
-		return true;
-	}
-	endPointer = beginPointer;
-	return 0;
+	beginPointer = (char*)malloc(sizeof(char) * maxS);
+	return;
 }
 
 char* alloc(size_t size)
 {
-	if ((currSize + size) > maxSize)
+	size_t newSize = currSize + size;
+	if (beginPointer && (newSize <= maxSize))
 	{
-		return nullptr;
+		char* ptr = beginPointer + currSize;
+		currSize = newSize;
+		return ptr;
 	}
-	currSize += size;
-	char* currPointer = endPointer;
-	endPointer += size;
-	return currPointer;
+	return NULL;
 }
+
 
 void reset()
 {
 	currSize = 0;
-	endPointer = beginPointer;
-}
-
-void freeAllocator()
-{
 	maxSize = 0;
-	currSize = 0;
-	endPointer = nullptr;
-	beginPointer = nullptr;
 	free(beginPointer);
+	beginPointer = NULL;
+	return;
 }
